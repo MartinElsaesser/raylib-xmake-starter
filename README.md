@@ -1,0 +1,1 @@
+[https://xmake.io/#/plugin/more_plugins?id=vscode-plugin](for use with vscode see)
