@@ -12,13 +12,15 @@ target("xmake-test")
     add_configfiles("src/(resources/*.png)", {onlycopy = true})
 
 
-    if is_plat("windows") then
+    -- hide console window on windows release builds
+    if is_plat("windows") and is_mode("release") then
         -- linker options as specified in https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=msvc-170
         add_ldflags("/SUBSYSTEM:WINDOWS", {force = true})
-        add_ldflags("/ENTRY:mainCRTStartup ", {force = true}) -- TODO: https://stackoverflow.com/questions/22934206/what-is-the-difference-between-main-and-maincrtstartup
+        add_ldflags("/ENTRY:mainCRTStartup", {force = true}) -- TODO: https://stackoverflow.com/questions/22934206/what-is-the-difference-between-main-and-maincrtstartup
     end
 
 
+    -- optimization? TODO: research
     if is_mode("release") then
         set_symbols("hidden")
         set_optimize("fastest")
